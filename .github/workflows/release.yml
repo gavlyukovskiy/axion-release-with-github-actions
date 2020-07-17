@@ -33,10 +33,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-cache-
 
-      # - name: Release new version
-      #   id: release
-      #   run: |
-      #     ./gradlew release \
-      #       -Prelease.version=1.1.1 \
-      #       -Prelease.attachRemote=https://${{ github.token }}@github.com/${{ github.repository }}.git \
-      #       --stacktrace
+      - name: Release new version
+        id: release
+        run: |
+          ./gradlew release \
+            -Prelease.version=1.0.0 \
+            -Prelease.attachRemote=https://${{ github.token }}@github.com/${{ github.repository }}.git \
+            --stacktrace

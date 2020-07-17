@@ -6,13 +6,16 @@ buildscript {
 
 plugins {
     java
-    id("pl.allegro.tech.build.axion-release").version("1.10.3")
+    id("pl.allegro.tech.build.axion-release").version("1.12.0")
 }
 
 scmVersion {
     with(tag) {
         prefix = ""
         versionSeparator = ""
+    }
+    with(repository) {
+
     }
 }
 
