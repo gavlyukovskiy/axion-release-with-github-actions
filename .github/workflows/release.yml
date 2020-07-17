@@ -8,6 +8,9 @@ on:
         required: true
         default: "1.0.0"
   push:
+  pull_request:
+    branches:
+      - master
 
 jobs:
   release:
@@ -16,10 +19,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      # - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
-      # - run: git fetch --prune --unshallow --tags
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
@@ -46,8 +45,7 @@ jobs:
         run: |
           ./gradlew release \
             -Prelease.customUsername=${{ github.actor }} \
-            -Prelease.customPassword=${{ github.token }} \
-            --stacktrace
+            -Prelease.customPassword=${{ github.token }}
 
       - name: Post release version
         id: post-prelease
