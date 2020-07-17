@@ -41,8 +41,8 @@ jobs:
       - name: Release new version
         id: release
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew release \
-            -Prelease.version=1.0.0 \
+            -Prelease.version=${{ github.event.inputs.releaseVersion || 1.1.0 }} \
             --stacktrace
