@@ -5,6 +5,8 @@ on:
     inputs:
       releaseVersion:
         description: "New version to be released, ex. '1.6.5'"
+        required: true
+        default: "1.0.0"
   push:
 
 jobs:
@@ -44,5 +46,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew release \
-            -Prelease.version=${{ github.event.inputs.releaseVersion || 1.1.0 }} \
+            -Prelease.version=${{ github.event.inputs.releaseVersion }} \
             --stacktrace
