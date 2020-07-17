@@ -35,10 +35,10 @@ tasks {
     val releaseCheck by registering {
         doLast {
             val errors = ArrayList<String>()
-            if (!project.hasProperty("release.version")) {
-                errors.add("'-Prelease.version' must be set")
-            }
             if (System.getenv("GITHUB_ACTIONS") != "true") {
+                if (!project.hasProperty("release.version")) {
+                    errors.add("'-Prelease.version' must be set")
+                }
                 if (!project.hasProperty("release.customUsername")) {
                     errors.add("'-Prelease.customUsername' must be set")
                 }
