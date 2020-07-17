@@ -36,13 +36,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Pre release version
+        id: pre-prelease
+        run: |
+          ./gradlew currentVersion
+
       - name: Release new version
         id: release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew release \
-            -Prelease.version=${{ github.event.inputs.releaseVersion }} \
             -Prelease.customUsername=${{ github.actor }} \
             -Prelease.customPassword=${{ github.token }} \
             --stacktrace
+
+      - name: Post release version
+        id: post-prelease
+        run: |
+          ./gradlew currentVersion
