@@ -5,6 +5,7 @@ on:
     inputs:
       releaseVersion:
         description: "New version to be released, ex. '1.6.5'"
+  push:
 
 jobs:
   release:
@@ -39,8 +40,9 @@ jobs:
 
       - name: Release new version
         id: release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           ./gradlew release \
             -Prelease.version=1.0.0 \
-            -Prelease.attachRemote=https://${{ github.token }}@github.com/${{ github.repository }}.git \
             --stacktrace

@@ -14,8 +14,11 @@ scmVersion {
         prefix = ""
         versionSeparator = ""
     }
-    with(repository) {
-
+    if (System.getenv("GITHUB_ACTIONS") == "true") {
+        with(repository) {
+            val githubToken = System.getenv("GITHUB_TOKEN")
+            remote = "https://$githubToken@github.com/gavlyukovskiy/axion-release-with-github-actions.git"
+        }
     }
 }
 
