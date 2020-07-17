@@ -1,6 +1,10 @@
 name: Maven release
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: "New version to be released, ex. '1.6.5'"
 
 jobs:
   release:
